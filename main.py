@@ -3,6 +3,9 @@
 # Imports
 from tkinter import Tk
 from tkinter.ttk import Frame
+from Components.ChoiceSection import ChoiceSection
+from Components.CurDateTimeSection import CurDateTimeSection
+from Components.InputSection import InputSection
 
 
 # Defined
@@ -18,6 +21,14 @@ class Base:
         self.topLevel.grid(row=0, column=0, sticky="news")
         self.topLevel.columnconfigure(0, weight=1)
 
+        # Choices Section
+        self.choiceInt = ChoiceSection(self.topLevel)
+
+        # Current DateTime Section
+        self.dateTime = CurDateTimeSection(self.topLevel)
+
+        # Entry Section
+        self.entries = InputSection(self.topLevel)
 
 
 # Literals
