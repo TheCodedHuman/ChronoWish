@@ -1,0 +1,28 @@
+# Python artifacts
+__pycache__/
+*.pyc
+
+# Virtual environments
+venv/
+env/
+
+# OS files
+.DS_Store
+
+# Logs
+*.log
+
+# DB files (if local)
+*.db
+*.sqlite3
+
+# Secrets
+config.json
+secrets.py
+
+# Tkinter cache (if any custom)
+*.tcl
+
+# MisX
+dump.txt
+
