@@ -6,6 +6,7 @@ from tkinter.ttk import Frame
 from Components.ChoiceSection import ChoiceSection
 from Components.CurDateTimeSection import CurDateTimeSection
 from Components.InputSection import InputSection
+from Components.DateSelectSection import DateSelectSection
 
 
 # Defined
@@ -29,6 +30,10 @@ class Base:
 
         # Entry Section
         self.entries = InputSection(self.topLevel)
+
+        # Date Select Section
+        self.date = DateSelectSection(self.topLevel)
+
 
 
 # Literals

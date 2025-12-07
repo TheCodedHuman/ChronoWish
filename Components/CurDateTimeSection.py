@@ -10,11 +10,11 @@ class CurDateTimeSection:
 
         # Date Label
         self.dateLabel = Label(self.timeFrame, text="")
-        self.dateLabel.grid(row=0, column=0, sticky="we", padx=10)
+        self.dateLabel.grid(row=0, column=0, sticky="we", padx=40)
 
         # Time Label
         self.timeLabel = Label(self.timeFrame, text="")
-        self.timeLabel.grid(row=0, column=1, sticky="we", padx=10)
+        self.timeLabel.grid(row=0, column=1, sticky="we", padx=40)
 
         # Update time per second
         self.update_datetime()
