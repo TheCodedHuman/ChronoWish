@@ -18,16 +18,29 @@ class DateSelectSection:
 
         # Month Spinbox
         self.monthVar = StringVar()
-        self.monthVar.set(months[0])
+        self.monthVar.set(months[0])            # ['january', ...]
         self.monthSpin = Spinbox(self.dateFrame, textvariable=self.monthVar, values=months, width=10, wrap=True)
         self.monthSpin.grid(row=0, column=2, padx=5)
 
 
-    def get_date_month(self):
-        date = self.dayVar.get()
+    def zip_date_month(self) -> int:
+        '''This function cleans the date and month value to send forward appropriately'''
+        date = self.dayVar.get()                # gets date
 
-        month_val = self.monthVar.get()
-        month = months.index(month_val)
+        month_val = self.monthVar.get()         # gets name of month
+        month = months.index(month_val)         # gets index of month_name
 
         return date, month
 
+
+    def get(self):
+        day, month = self.zip_date_month()
+        return {
+            "day": day,
+            "month": month
+        }
+    
+    def clear(self):
+        self.dayVar.set(1)
+        self.monthVar.set(months[0])
+    

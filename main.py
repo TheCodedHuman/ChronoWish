@@ -7,6 +7,7 @@ from Components.ChoiceSection import ChoiceSection
 from Components.CurDateTimeSection import CurDateTimeSection
 from Components.InputSection import InputSection
 from Components.DateSelectSection import DateSelectSection
+from Components.MainButtons import ResetButton, SubmitButton
 
 
 # Defined
@@ -34,6 +35,15 @@ class Base:
         # Date Select Section
         self.date = DateSelectSection(self.topLevel)
 
+        # ButtonFrame Section
+        self.fields = [self.entries, self.date]                 # each field is providing 2 values currently
+
+        self.buttons = Frame(self.topLevel, padding=(0, 10))
+        self.buttons.grid()
+
+        ResetButton(self.buttons, resetFields=self.fields)
+        self.submitButton = SubmitButton(self.buttons, submitFields=self.fields)
+        
 
 
 # Literals

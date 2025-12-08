@@ -8,8 +8,6 @@ class EntryField:
         # Frame containing Label and Entry together
         self.instanceFrame = Frame(parent, padding=(0, 10))
         self.instanceFrame.grid(row=0, column=col, sticky="we", padx=10)
-        self.instanceFrame.columnconfigure(0, weight=1)
-        self.instanceFrame.columnconfigure(1, weight=1)
 
         # EntryLabel
         self.label = label + ":"
@@ -19,4 +17,17 @@ class EntryField:
         self.instanceEntryField = StringVar()
         self.entry = Entry(self.instanceFrame, width=30, textvariable=self.instanceEntryField)
         self.entry.grid(row=0, column=1, sticky="w")
+
+
+    # DeBug-able Get method
+    def get(self, debug: bool = False) -> str:
+        if debug:
+            print(self.instanceEntryField.get())
+            return self.instanceEntryField.get()
+        else:
+            return self.instanceEntryField.get()
+
+
+    def clear(self):
+        self.instanceEntryField.set("")
 
