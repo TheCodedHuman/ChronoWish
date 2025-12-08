@@ -12,21 +12,17 @@ class ChoiceSection:
             self.choiceVar.set(1)
 
             # RadioButtons within it
-            self.findBirth = Radiobutton(self.choiceFrame, text="Find Birthday By Date", variable=self.choiceVar, value=1)
-            self.findBirth.grid(row=0, column=0, sticky="we", padx=10)
+            self.findBirth = Radiobutton(self.choiceFrame, text="Find Birthday By Date", variable=self.choiceVar, value=1, command=self.on_choice_change())
+            self.findBirth.grid_forget(row=0, column=0, sticky="we", padx=10)
 
-            self.findNear = Radiobutton(self.choiceFrame, text="Find Nearest Birthday", variable=self.choiceVar, value=2)
+            self.findNear = Radiobutton(self.choiceFrame, text="Find Nearest Birthday", variable=self.choiceVar, value=2, command=self.on_choice_change())
             self.findNear.grid(row=0, column=1, sticky="we", padx=10)
 
-            self.uploadBirth = Radiobutton(self.choiceFrame, text="Upload Birthday", variable=self.choiceVar, value=3)
+            self.uploadBirth = Radiobutton(self.choiceFrame, text="Upload Birthday", variable=self.choiceVar, value=3, command=self.on_choice_change())
             self.uploadBirth.grid(row=0, column=2, sticky="we", padx=10)
 
 
-        def getChoice(self):
-            return self.choiceVar.get()
-        
-
-        # DeBug
-        def onChoiceChange(self, *args):
-            print("Selected:", self.getChoice())
+        def on_choice_change(self):
+            if self.callback():
+                print("Selected:", self.choiceVar.get())
 

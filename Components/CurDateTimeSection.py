@@ -3,7 +3,7 @@ from  tkinter.ttk import Frame, Label
 
 class CurDateTimeSection:
     def __init__(self, parent: Frame):
-        self.timeFrame = Frame(parent, padding=(0, 10))
+        self.timeFrame = Frame(parent, padding=(0, 10), relief="solid")
         self.timeFrame.grid()
         self.timeFrame.columnconfigure(0, weight=1)
         self.timeFrame.columnconfigure(1, weight=1)
