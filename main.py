@@ -5,9 +5,9 @@ from tkinter import Tk
 from tkinter.ttk import Frame
 from Components.ChoiceSection import ChoiceSection
 from Components.CurDateTimeSection import CurDateTimeSection
-from Components.InputSection import InputSection
-from Components.DateSelectSection import DateSelectSection
-from Components.MainButtons import ResetButton, SubmitButton
+from Components.SectionGroup1.SectionGroup1 import SectionGroup1
+from Components.SectionGroup2.SectionGroup2 import SectionGroup2
+from Components.SectionGroup3.SectionGroup3 import SectionGroup3
 
 
 # Defined
@@ -23,31 +23,45 @@ class Base:
         self.topLevel.grid(row=0, column=0, sticky="news")
         self.topLevel.columnconfigure(0, weight=1)
 
+        #-------------------------------------------------------#
+
         # Choices Section
         self.choiceInt = ChoiceSection(self.topLevel)
+        self.choiceInt.set_callback(self.switch_section)
 
         # Current DateTime Section
         self.dateTime = CurDateTimeSection(self.topLevel)
 
-        # Entry Section
-        self.entries = InputSection(self.topLevel)
+        #-------------------------------------------------------#
 
-        # Date Select Section
-        self.date = DateSelectSection(self.topLevel)
+        # Sub-Frame containing groups
+        self.dynamicFrame = Frame(self.topLevel)
+        self.dynamicFrame.grid(sticky="news")
+        self.dynamicFrame.columnconfigure(0, weight=1)
 
-        # ButtonFrame Section
-        self.fields = [self.entries, self.date]                 # each field is providing 2 values currently
+        self.group_1 = SectionGroup1(self.dynamicFrame)
+        self.group_2 = SectionGroup2(self.dynamicFrame)
+        self.group_3 = SectionGroup3(self.dynamicFrame)
 
-        self.buttons = Frame(self.topLevel, padding=(0, 10))
-        self.buttons.grid()
+        # Hide all groups initially and call the switch_section manually
+        self.group_1.groupFrame.grid_remove()
+        self.group_2.groupFrame.grid_remove()
+        self.group_3.groupFrame.grid_remove()
+        self.switch_section(self.choiceInt.choiceVar.get())
 
-        ResetButton(self.buttons, resetFields=self.fields)
-        self.submitButton = SubmitButton(self.buttons, submitFields=self.fields)
-        
 
+    def switch_section(self, choice: int):
 
-# Literals
+        # Initially hiding all groups
+        self.group_1.groupFrame.grid_remove()
+        self.group_2.groupFrame.grid_remove()
+        self.group_3.groupFrame.grid_remove()
 
+        # Manipulation
+        match choice:
+            case 1: self.group_1.groupFrame.grid()
+            case 2: self.group_2.groupFrame.grid()
+            case 3: self.group_3.groupFrame.grid()
 
 
 # Main
