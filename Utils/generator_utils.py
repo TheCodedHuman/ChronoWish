@@ -11,8 +11,11 @@ def generate_uid(length: int = 6) -> str:
     
     synthesis = ""                                      # empty string getting appended
 
-    for _ in range(length):
+    for _ in range(length + 1):
         synthesis += choice(characters)                 # can be optimized by ''.join() method
 
     return synthesis
 
+
+if __name__ == "__main__":
+    print(generate_uid())
