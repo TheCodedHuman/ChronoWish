@@ -4,7 +4,8 @@ from .DateSelectSection import DateSelectSection
 from .MainButtons import ResetButton, SubmitButton
 
 class SectionGroup1:
-    def __init__(self, parent: Frame):
+    def __init__(self, parent: Frame, db):
+        self.db = db
         self.groupFrame = Frame(parent)
         self.groupFrame.grid()
 
@@ -21,6 +22,6 @@ class SectionGroup1:
         self.buttons.grid()
 
         ResetButton(self.buttons, resetFields=self.fields)
-        self.submitButton = SubmitButton(self.buttons, submitFields=self.fields)
-        
+        self.submitButton = SubmitButton(self.buttons, self.fields, self.db)
+
     

@@ -44,6 +44,31 @@ class ChronoDB:
         result = self.cursor.execute(query, (find,)).fetchone()
 
         return result is not None                                                                           # returns False if empty set
+    
+
+    def fetch_birthday(self, uid: str = None, name: str = None, day: int = None, month: int = None) -> list[str | int]:
+        """Fethes rows matching the given filters"""
+
+        query = "SELECT * FROM birthdays WHERE 1=1"
+        params = []
+
+        if uid:
+            query += " AND uid = ?"
+            params.append(uid)
+
+        if name:
+            query += " AND name = ?"
+            params.append(name)
+
+        if day:
+            query += " AND day = ?"
+            params.append(day)
+
+        if month:
+            query += " AND month = ?"
+            params.append(month)
+
+        return self.cursor.execute(query, params).fetchall()
 
 
     def push_birthday(self, name: str, day: int, month: int):
@@ -66,5 +91,7 @@ def main():
     db_path = Path(__file__).parent / "chronowish.db"
     db = ChronoDB(db_path)
     db.close()
-main()
+
+if __name__ == "__main__":
+    main()
 

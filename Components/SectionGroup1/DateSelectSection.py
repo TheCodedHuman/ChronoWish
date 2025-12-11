@@ -1,6 +1,6 @@
 from tkinter.ttk import Spinbox, Frame, Label
 from tkinter import StringVar, IntVar
-from Assets.months import months
+from Assets.months import months, month_to_number
 
 class DateSelectSection:
     def __init__(self, parent):
@@ -18,29 +18,28 @@ class DateSelectSection:
 
         # Month Spinbox
         self.monthVar = StringVar()
-        self.monthVar.set(months[0])            # ['january', ...]
-        self.monthSpin = Spinbox(self.dateFrame, textvariable=self.monthVar, values=months, width=10, wrap=True)
+        self.monthVar.set(months.get(1))            # 'january'
+        self.monthSpin = Spinbox(self.dateFrame, 
+                                 textvariable=self.monthVar, 
+                                 values=tuple(months.values()), 
+                                 width=10, 
+                                 wrap=True)
         self.monthSpin.grid(row=0, column=2, padx=5)
 
 
-    def zip_date_month(self) -> int:
-        '''This function cleans the date and month value to send forward appropriately'''
-        date = self.dayVar.get()                # gets date
+    def get(self) -> dict:
+        """This function gets the day and month number and returns them in a dictionary"""
 
-        month_val = self.monthVar.get()         # gets name of month
-        month = months.index(month_val)         # gets index of month_name
+        day = self.dayVar.get()
+        month_name = self.monthVar.get()
+        month_number = month_to_number[month_name]
 
-        return date, month
-
-
-    def get(self):
-        day, month = self.zip_date_month()
         return {
             "day": day,
-            "month": month
+            "month": month_number
         }
     
     def clear(self):
         self.dayVar.set(1)
-        self.monthVar.set(months[0])
+        self.monthVar.set(months[1])
     
