@@ -68,6 +68,7 @@ def main():
 
     # Base Window
     root = Tk()
+    root.title("ChronoWish")
     root.columnconfigure(0, weight=1)
     root.rowconfigure(0, weight=1)
 
