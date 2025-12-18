@@ -20,6 +20,9 @@ env/
 config.json
 secrets.py
 
+# Personal media
+Assets/private/
+
 # Tkinter cache (if any custom)
 *.tcl
 

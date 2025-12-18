@@ -2,10 +2,11 @@ from tkinter.ttk import Frame
 from .InputSection import InputSection
 from .DateSelectSection import DateSelectSection
 from .MainButtons import ResetButton, SubmitButton
+from .ResultSection import ResultSection
 
 class SectionGroup1:
     def __init__(self, parent: Frame, db):
-        self.db = db
+        self._db = db
         self.groupFrame = Frame(parent)
         self.groupFrame.grid()
 
@@ -22,6 +23,9 @@ class SectionGroup1:
         self.buttons.grid()
 
         ResetButton(self.buttons, resetFields=self.fields)
-        self.submitButton = SubmitButton(self.buttons, self.fields, self.db)
+        self.submitButton = SubmitButton(self.buttons, self.fields, self._db)
 
+        # Intel Table and ProgressBar Section
+        ResultSection(self.groupFrame)
+        
     

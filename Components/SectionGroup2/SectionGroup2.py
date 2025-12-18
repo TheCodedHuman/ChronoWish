@@ -2,7 +2,8 @@ from tkinter.ttk import Frame
 from .TempHoldLabel import TempHoldLabel
 
 class SectionGroup2:
-    def __init__(self, parent):
+    def __init__(self, parent: Frame, db):
+        self._db = db
         self.groupFrame = Frame(parent)
         self.groupFrame.grid()
 

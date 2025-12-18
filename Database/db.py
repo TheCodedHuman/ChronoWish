@@ -13,14 +13,14 @@ class ChronoDB:
     SAFE_FIELDS = {"uid", "name", "day", "month"}
 
     def __init__(self, path: str | Path = "chronowish.db"):
-        self.db = sqlite3.connect(path)
-        self.cursor = self.db.cursor()
+        self._db = sqlite3.connect(path)
+        self.cursor = self._db.cursor()
         self.create_tables('birthdays')
 
 
     def close(self): 
         """Closes the database"""
-        self.db.close()
+        self._db.close()
 
 
     def create_tables(self, table_name: str):
@@ -30,7 +30,7 @@ class ChronoDB:
             raise ValueError(f"Unknown table: {table_name}")
         
         self.cursor.execute(TABLES[table_name])
-        self.db.commit()
+        self._db.commit()
 
 
     def check_existence(self, find, field_name, table_name = "birthdays") -> bool:                          # can be enhancements
@@ -82,7 +82,7 @@ class ChronoDB:
         query = "INSERT INTO birthdays (uid, name, day, month) VALUES (?, ?, ?, ?)"                         # t-strings may also be used
         self.cursor.execute(query, (uid, name, day, month))
 
-        self.db.commit()
+        self._db.commit()
         return uid
         
 

@@ -17,7 +17,7 @@ class Base:
     def __init__(self, root, db):
 
         # TopLevel Frame
-        self.db = db
+        self._db = db
         self.topLevel = Frame(root, padding=15)
         self.topLevel.grid(row=0, column=0, sticky="news")
         self.topLevel.columnconfigure(0, weight=1)
@@ -38,9 +38,9 @@ class Base:
         self.dynamicFrame.grid(sticky="news")
         self.dynamicFrame.columnconfigure(0, weight=1)
 
-        self.group_1 = SectionGroup1(self.dynamicFrame, self.db)
-        self.group_2 = SectionGroup2(self.dynamicFrame, self.db)
-        self.group_3 = SectionGroup3(self.dynamicFrame, self.db)
+        self.group_1 = SectionGroup1(self.dynamicFrame, self._db)
+        self.group_2 = SectionGroup2(self.dynamicFrame, self._db)
+        self.group_3 = SectionGroup3(self.dynamicFrame, self._db)
 
         # Hide all groups initially and call the switch_section manually
         self.group_1.groupFrame.grid_remove()
