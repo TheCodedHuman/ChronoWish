@@ -4,6 +4,9 @@ from .DateSelectSection import DateSelectSection
 from .MainButtons import ResetButton, SubmitButton
 from .ResultSection import ResultSection
 
+# SubmitButton → collects fields → fetches DB → returns result
+# ResultSection → receives result → updates IntelTable
+
 class SectionGroup1:
     def __init__(self, parent: Frame, db):
         self._db = db
@@ -22,10 +25,9 @@ class SectionGroup1:
         self.buttons = Frame(self.groupFrame, padding=(0, 10))
         self.buttons.grid()
 
-        ResetButton(self.buttons, resetFields=self.fields)
-        self.submitButton = SubmitButton(self.buttons, self.fields, self._db)
-
         # Intel Table and ProgressBar Section
-        ResultSection(self.groupFrame)
-        
-    
+        self.resultSection = ResultSection(self.groupFrame)     # had to call earlier due to line-by-line execution of python
+
+        ResetButton(self.buttons, resetFields=self.fields)
+        SubmitButton(self.buttons, self.fields, self._db, resultSection=self.resultSection)           # self.submitButton
+

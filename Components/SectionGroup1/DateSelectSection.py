@@ -1,6 +1,6 @@
 from tkinter.ttk import Spinbox, Frame, Label
 from tkinter import StringVar, IntVar
-from Assets.months import months, month_to_number
+from Assets.MONTHS import months, month_to_number
 
 class DateSelectSection:
     def __init__(self, parent):
