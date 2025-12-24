@@ -33,7 +33,7 @@ class ChronoDB:
         self._db.commit()
 
 
-    def check_existence(self, find, field_name, table_name = "birthdays") -> bool:                          # can be enhancements
+    def check_existence(self, find: str, field_name: str, table_name: str = "birthdays") -> bool:                          # can be enhancements
         """Checks if a value exists in a specific field of a table"""
 
         # Input sanitization (table_name and field_name)
@@ -46,7 +46,7 @@ class ChronoDB:
         return result is not None                                                                           # returns False if empty set
     
 
-    def fetch_birthday(self, uid: str = None, name: str = None, day: int = None, month: int = None) -> list[str | int]:
+    def fetch_birthday(self, uid: str = None, name: str = None, day: int = None, month: int = None, year: int = None) -> list[str | int]:
         """Fethes rows matching the given filters"""
 
         query = "SELECT * FROM birthdays WHERE 1=1"
@@ -68,10 +68,14 @@ class ChronoDB:
             query += " AND month = ?"
             params.append(month)
 
+        if year:
+            query += " AND year = ?"
+            params.append(year)
+
         return self.cursor.execute(query, params).fetchall()
 
 
-    def push_birthday(self, name: str, day: int, month: int):
+    def push_birthday(self, name: str, day: int, month: int, year: int):
         """Inserts a birthday entry with a unique UID"""
 
         uid = generate_uid()                                                                                # generate unique_id
@@ -79,12 +83,21 @@ class ChronoDB:
         while self.check_existence(uid, "uid"):                                                             # keep checking if that uid exists in db
             uid = generate_uid()
         
-        query = "INSERT INTO birthdays (uid, name, day, month) VALUES (?, ?, ?, ?)"                         # t-strings may also be used
-        self.cursor.execute(query, (uid, name, day, month))
+        query = "INSERT INTO birthdays (uid, name, day, month, year) VALUES (?, ?, ?, ?, ?)"                         # t-strings may also be used
+        self.cursor.execute(query, (uid, name, day, month, year))
 
         self._db.commit()
         return uid
         
+
+    def get_columns(self, table_name: str = "birthdays") -> list[str]:      # unused
+        """Fetches the column names in order"""
+
+        description_seq = self.cursor.execute(f"PRAGMA table_info({table_name})").fetchall()        # description can also work
+        col_list = [info[1] for info in description_seq]
+
+        return col_list
+
 
 # Main
 def main():

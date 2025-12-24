@@ -14,7 +14,7 @@ class ResetButton(Button):
 
 
 class SubmitButton(Button):
-    def __init__(self, parent, submitFields: list | tuple, db, resultSection = None, debug: bool = False):
+    def __init__(self, parent, submitFields: list | tuple, db, resultSection, debug: bool = False):
 
         self._db = db
         self.debug = debug
@@ -36,10 +36,9 @@ class SubmitButton(Button):
 
         result: list[tuple] = self._db.fetch_birthday(**collected)              # this is where first time tkinter getting data
 
-        if self.resultSection: 
-            self.resultSection.update_results(result) 
-            # this is redirecting towards resultSection and col_order is also there, so better if resultSection itself handles it
-            # also, its submit "button" so better it does the work of button rather than processing
+        self.resultSection.update_results(result) 
+        # this is redirecting towards resultSection and col_order is also there, so better if resultSection itself handles it
+        # also, its submit "button" so better it does the work of button rather than processing
 
         if self.debug:
             print(f"Collected data: {collected}")

@@ -17,7 +17,7 @@ class SectionGroup1:
         self.entries = InputSection(self.groupFrame)
 
         # Date-Select Section
-        self.date = DateSelectSection(self.groupFrame)
+        self.date = DateSelectSection(self.groupFrame, debug=True)
 
         # ButtonFrame Section
         self.fields = [self.entries, self.date]                 # each field is providing 2 values currently
@@ -29,5 +29,5 @@ class SectionGroup1:
         self.resultSection = ResultSection(self.groupFrame)     # had to call earlier due to line-by-line execution of python
 
         ResetButton(self.buttons, resetFields=self.fields)
-        SubmitButton(self.buttons, self.fields, self._db, resultSection=self.resultSection)           # self.submitButton
+        SubmitButton(self.buttons, self.fields, self._db, self.resultSection)           # self.submitButton
 
