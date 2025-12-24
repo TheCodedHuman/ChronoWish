@@ -1,4 +1,5 @@
 from tkinter.ttk import Button
+from Utils.validate_util import validate_values
 
 
 class ResetButton(Button):
@@ -23,6 +24,7 @@ class SubmitButton(Button):
 
         super().__init__(parent, text="Search", command=self.on_submit)
         self.grid(row=0, column=1, padx=10)
+        self.state(['disabled'])            # initiate it being disabled
 
 
     def on_submit(self) -> list[tuple[int | str]]:

@@ -2,6 +2,7 @@ from tkinter.ttk import Spinbox, Frame, Label
 from tkinter import StringVar, IntVar
 from Assets.MONTHS import months, month_to_number
 
+
 class DateSelectSection:
     def __init__(self, parent, debug: bool = False):
         self.debug = debug
@@ -38,15 +39,12 @@ class DateSelectSection:
 
         result = {}
 
-        if day == 0 and month_name == 'select month': raise ValueError("Bro, Don't pass day=0 and month='select month'")
+        # gets day number from ui
+        result["day"] = day
 
-        if day != 0: 
-            result["day"] = day
-
-        if month_name != "select month":
-            month_number = month_to_number.get(month_name)
-            if month_number:
-                result["month"] = month_number
+        # gets month name form ui and fetches month name by its key
+        month_number = month_to_number.get(month_name, "select month")          # returns None at its core, defaulted to "select month"
+        result["month"] = month_number
 
         # Debug print
         if (self.debug) and (day == 0) and (month_name == "Select Month"):

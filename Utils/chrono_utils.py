@@ -89,7 +89,7 @@ class ReorderBirthdayData:
 
             new_data.append(tuple(new_row))
 
-        if self.debug: print(f"New Re-Strutured Data:{new_data}")
+        if self.debug: print(f"New Re-Strutured Data:{new_data}\n")
         return new_data
 
 
